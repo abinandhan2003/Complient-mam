@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import Profiledrop from './Asserts/Profiledrop/Profiledrop';
+import Profileimg from './img/profile.avif';
+import Notificationdrop from './Asserts/Notificationdrop/Notificationdrop';
+
 
 function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -8,16 +12,18 @@ function Dashboard() {
     };
 
     const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
+    const [showhelpDropdown, sethelpDropdown] = useState(false);
 
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-    const [showHelpDropdown, setShowHelpDropdown] = useState(false);
+    // const [showHelpDropdown, setShowHelpDropdown] = useState(false);
+    const [shownotificationDropdown, setShownotificationDropdown] = useState(false);
 
     const toggleProfileDropdown = () => {
         setShowProfileDropdown(!showProfileDropdown);
     };
 
-    const toggleHelpDropdown = () => {
-        setShowHelpDropdown(!showHelpDropdown);
+    const togglenotificationDropdown = () => {
+        setShownotificationDropdown(!shownotificationDropdown);
     };
 
     return (
@@ -53,37 +59,26 @@ function Dashboard() {
                         </svg>
 
                     </button>
-                    
-                    {/* Help Icon with Dropdown */}
-                    <button onClick={toggleHelpDropdown} className="relative">
+
+                    {/* Notification Icon with Dropdown */}
+                    <button onClick={togglenotificationDropdown} className="relative">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
                             <path d="M4.214 3.227a.75.75 0 0 0-1.156-.955 8.97 8.97 0 0 0-1.856 3.825.75.75 0 0 0 1.466.316 7.47 7.47 0 0 1 1.546-3.186ZM16.942 2.272a.75.75 0 0 0-1.157.955 7.47 7.47 0 0 1 1.547 3.186.75.75 0 0 0 1.466-.316 8.971 8.971 0 0 0-1.856-3.825Z" />
                             <path fillRule="evenodd" d="M10 2a6 6 0 0 0-6 6c0 1.887-.454 3.665-1.257 5.234a.75.75 0 0 0 .515 1.076 32.91 32.91 0 0 0 3.256.508 3.5 3.5 0 0 0 6.972 0 32.903 32.903 0 0 0 3.256-.508.75.75 0 0 0 .515-1.076A11.448 11.448 0 0 1 16 8a6 6 0 0 0-6-6Zm0 14.5a2 2 0 0 1-1.95-1.557 33.54 33.54 0 0 0 3.9 0A2 2 0 0 1 10 16.5Z" clipRule="evenodd" />
                         </svg>
-                        {/* Help Dropdown */}
-                        {showHelpDropdown && (
-                            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-10">
-                                <a href="#submit-feedback" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Submit Feedback</a>
-                                <a href="#contact-us" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Contact Us</a>
-                            </div>
+                        {/* Notification Dropdown */}
+                        {shownotificationDropdown && (
+                            <Notificationdrop />
                         )}
                     </button>
 
 
                     {/* Profile Icon with Dropdown */}
                     <button onClick={toggleProfileDropdown} className="relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
+                        <img src={Profileimg} alt="profile" className='size-8 rounded-full' />
                         {/* Profile Dropdown */}
                         {showProfileDropdown && (
-                            <div className="absolute right-0 text-left mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-10">
-                                <a href="#username" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"> krishna@gmail.com</a>
-                                <a href="#settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                                <a href="#my-account" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Account</a>
-                                <a href="#theme" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Theme</a>
-                                <a href="#signout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign Out</a>
-                            </div>
+                                <Profiledrop />
                         )}
                     </button>
 
@@ -152,13 +147,24 @@ function Dashboard() {
                             </li>
 
                             {/* <!-- Help --> */}
-                            <li className="flex items-center space-x-3 py-2 hover:bg-gray-100 rounded-lg px-3 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0ZM8.94 6.94a.75.75 0 1 1-1.061-1.061 3 3 0 1 1 2.871 5.026v.345a.75.75 0 0 1-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 1 0 8.94 6.94ZM10 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
-                                </svg>
-                                <a href="#help" className="text-sm font-medium">Help</a>
-
+                            <li id='help-dropdown' className="flex flex-col space-y-2">
+                                <div className="flex items-center space-x-3 py-2 hover:bg-gray-100 rounded-lg px-3 transition" onClick={() => sethelpDropdown(!showhelpDropdown)} >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0ZM8.94 6.94a.75.75 0 1 1-1.061-1.061 3 3 0 1 1 2.871 5.026v.345a.75.75 0 0 1-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 1 0 8.94 6.94ZM10 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" />
+                                    </svg>
+                                    <a href="#help" className="text-sm font-medium">Help</a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                {showhelpDropdown && (
+                                    <ul className="ml-6 mt-2 space-y-2">
+                                        <li><a href="#profile" className="text-sm font-medium hover:text-gray-800"> Submit Feedback</a></li>
+                                        <li><a href="#subscription" className="text-sm font-medium hover:text-gray-800">  Contact us </a></li>
+                                    </ul>
+                                )}
                             </li>
+
                         </ul>
                     </nav>
                 </aside>
