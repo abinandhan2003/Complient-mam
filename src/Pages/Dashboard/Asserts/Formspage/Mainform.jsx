@@ -28,7 +28,7 @@ function Mainform() {
 
     return (
         <div className='flex gap-5 flex-wrap'>
-            <div className='w-80 rounded-lg bg-white flex flex-col p-4 hover:shadow-md transition-all duration-200'>
+            <div className='md:w-80 w-full rounded-lg bg-white flex flex-col p-4 hover:shadow-md transition-all duration-200'>
                 <div className='bg-gradient-to-r from-[#ffccf3] to-[#ffb7ba] w-full h-44 rounded-lg'></div>
                 <div className='flex justify-between mt-4'>
                     <div className='font-semibold text-xl'> Form Title </div>
