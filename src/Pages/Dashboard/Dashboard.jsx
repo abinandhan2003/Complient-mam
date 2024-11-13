@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Profiledrop from './Asserts/Profiledrop/Profiledrop';
 import Profileimg from './img/profile.avif';
 import Notificationdrop from './Asserts/Notificationdrop/Notificationdrop';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 function Dashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -50,6 +50,22 @@ function Dashboard() {
         };
     }, []);
 
+        async function getData() {
+            const url = "http://localhost:5000/api/auth/me";
+            try {
+              const response = await fetch(url);
+              if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+              }
+          
+              const json = await response.json();
+              console.log(json);
+            } catch (error) {
+              console.error(error.message);
+            }
+          }
+          getData()
+    // console.log(response)
     return (
         <div className="flex flex-col h-screen font-sans">
             {/* Top Bar */}
@@ -61,6 +77,7 @@ function Dashboard() {
                             type="text"
                             placeholder="Search..."
                             className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full focus:outline-none"
+                            style={{ width: '300px' }}
                         />
                         <svg
                             className="absolute top-2.5 right-3 h-5 w-5 text-gray-500"
@@ -129,20 +146,24 @@ function Dashboard() {
                             </div>
 
                             {/* <!-- Dashboard --> */}
-                            <li className="flex items-center space-x-3 py-2 hover:bg-gray-100 rounded-lg px-3 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                                    <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
-                                </svg>
-                                <a href="#dashboard" className="text-sm font-medium">Dashboard</a>
-                            </li>
+                            <Link to="/">
+                                <li className="flex items-center space-x-3 py-2 hover:bg-gray-100 rounded-lg px-3 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                        <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
+                                    </svg>
+                                    <a href="#dashboard" className="text-sm font-medium">Dashboard</a>
+                                </li>
+                            </Link>
 
                             {/* <!-- My Profile --> */}
-                            <li className="flex items-center space-x-3 py-2 hover:bg-gray-100 rounded-lg px-3 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                                    <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
-                                </svg>
-                                <a href="#profile" className="text-sm font-medium">My Profile</a>
-                            </li>
+                            <Link to="/profile">
+                                <li className="flex items-center space-x-3 py-2 hover:bg-gray-100 rounded-lg px-3 transition">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                                        <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+                                    </svg>
+                                    <a href="#profile" className="text-sm font-medium">My Profile</a>
+                                </li>
+                            </Link>
 
                             {/* <!-- Settings Dropdown --> */}
                             <li className="flex flex-col space-y-2">
@@ -158,9 +179,11 @@ function Dashboard() {
                                 </div>
                                 {showSettingsDropdown && (
                                     <ul className="ml-6 mt-2 space-y-2">
-                                        <li><a href="#profile" className="text-sm font-medium hover:text-gray-800">Profile</a></li>
-                                        <li><a href="#subscription" className="text-sm font-medium hover:text-gray-800">Subscription</a></li>
-                                        <li><a href="#password" className="text-sm font-medium hover:text-gray-800">Password</a></li>
+                                        <Link to="/profile">
+                                            <li><a href="#profile" className="text-sm font-medium hover:text-gray-800">Profile</a></li></Link>
+                                        <Link to="/subscription">  <li><a href="#subscription" className="text-sm font-medium hover:text-gray-800">Subscription</a></li> </Link>
+
+                                        <Link to="/password"><li><div className="text-sm font-medium hover:text-gray-800">Password</div></li> </Link>
                                     </ul>
                                 )}
                             </li>
